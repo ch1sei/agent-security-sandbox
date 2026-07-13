@@ -1,0 +1,4 @@
+name: agent-security-sandbox
+channels:
+  - conda-forge
+dependencies: []

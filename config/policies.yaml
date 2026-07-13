@@ -1,0 +1,19 @@
+project: agent-security-sandbox
+default_action: review
+policy_version: 2025.04
+rules:
+  - id: sensitive-file-access
+    match: [".ssh", "id_rsa", "credentials", ".env"]
+    risk: critical
+    action: block
+  - id: external-exfiltration
+    match: ["curl", "wget", "upload", "send"]
+    risk: high
+    action: review
+  - id: destructive-shell
+    match: ["rm -rf", "mkfs", "shutdown"]
+    risk: critical
+    action: block
+approval:
+  required_for: [high, critical]
+  timeout_seconds: 180
